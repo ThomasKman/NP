@@ -1,0 +1,27 @@
+E:\AWE projekte\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\bin\Debug\Notenverwaltung.exe.config
+E:\AWE projekte\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\bin\Debug\Notenverwaltung.exe
+E:\AWE projekte\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\bin\Debug\Notenverwaltung.pdb
+E:\AWE projekte\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\obj\Debug\Notenverwaltung.csprojResolveAssemblyReference.cache
+E:\AWE projekte\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\obj\Debug\Notenverwaltung.exe
+E:\AWE projekte\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\obj\Debug\Notenverwaltung.pdb
+G:\AWE projekte\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\bin\Debug\Notenverwaltung.exe.config
+G:\AWE projekte\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\bin\Debug\Notenverwaltung.exe
+G:\AWE projekte\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\bin\Debug\Notenverwaltung.pdb
+G:\AWE projekte\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\obj\Debug\Notenverwaltung.csprojAssemblyReference.cache
+G:\AWE projekte\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\obj\Debug\Notenverwaltung.csproj.CoreCompileInputs.cache
+G:\AWE projekte\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\obj\Debug\Notenverwaltung.exe
+G:\AWE projekte\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\obj\Debug\Notenverwaltung.pdb
+C:\Users\Thomas\Desktop\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\bin\Debug\Notenverwaltung.exe.config
+C:\Users\Thomas\Desktop\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\bin\Debug\Notenverwaltung.exe
+C:\Users\Thomas\Desktop\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\bin\Debug\Notenverwaltung.pdb
+C:\Users\Thomas\Desktop\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\obj\Debug\Notenverwaltung.csprojAssemblyReference.cache
+C:\Users\Thomas\Desktop\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\obj\Debug\Notenverwaltung.csproj.CoreCompileInputs.cache
+C:\Users\Thomas\Desktop\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\obj\Debug\Notenverwaltung.exe
+C:\Users\Thomas\Desktop\NotenProgramm\NotenProgramm\Notenverwaltung\Notenverwaltung\Notenverwaltung\obj\Debug\Notenverwaltung.pdb
+C:\Users\Thomas\Desktop\NotenProgramm\NotenProgramm\Notenverwaltung\obj\Debug\Notenverwaltung.csprojAssemblyReference.cache
+C:\Users\Thomas\Desktop\NotenProgramm\NotenProgramm\Notenverwaltung\obj\Debug\Notenverwaltung.csproj.CoreCompileInputs.cache
+C:\Users\Thomas\Desktop\NotenProgramm\NotenProgramm\Notenverwaltung\obj\Debug\Notenverwaltung.exe
+C:\Users\Thomas\Desktop\NotenProgramm\NotenProgramm\Notenverwaltung\obj\Debug\Notenverwaltung.pdb
+C:\Users\Thomas\Desktop\NotenProgramm\NotenProgramm\Notenverwaltung\bin\Debug\Notenverwaltung.exe.config
+C:\Users\Thomas\Desktop\NotenProgramm\NotenProgramm\Notenverwaltung\bin\Debug\Notenverwaltung.exe
+C:\Users\Thomas\Desktop\NotenProgramm\NotenProgramm\Notenverwaltung\bin\Debug\Notenverwaltung.pdb
