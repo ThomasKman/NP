@@ -90,7 +90,6 @@ namespace Notenverwaltung
             {
                 menuModifier--;
 
-
             }
 
             if (navIndex == 3)
@@ -251,7 +250,7 @@ namespace Notenverwaltung
                 if (gedrückteTaste.Equals(ConsoleKey.UpArrow))
                 {
 
-                    Grafiken.ZeichneMenuPunkte(33, 20, 86, -1, new List<string>() { "SchülerManager", "Neues Schulfach", "Versetzen", "klasse Löschen" });
+                    Grafiken.zeichneBox((Console.WindowWidth/4)+3, 20, ((Console.WindowWidth /4)*3)-5, 1, ' ', ConsoleColor.Black, ConsoleColor.Black);
                     return true;
 
                 }

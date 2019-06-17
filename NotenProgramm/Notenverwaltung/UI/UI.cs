@@ -24,13 +24,15 @@ namespace Notenverwaltung
         public static Schulfach AktuellesSchulfach;
         static Menu menu;
 
+
+        // Menünavigation
+
         public static void Start()
 
         {
 
             Console.SetBufferSize(120, 60);
             Console.SetWindowSize(120,60);
-
             Console.CursorVisible = false;
             Console.TreatControlCAsInput = true;
             Grafiken.ZeichneMenu();
@@ -79,19 +81,8 @@ namespace Notenverwaltung
 
         }
 
-
-  
-
-
-
-
-
-     
-
-
-
-
-
+                                    
+               
         public static int readInt()
         {
             ConsoleKeyInfo key;
