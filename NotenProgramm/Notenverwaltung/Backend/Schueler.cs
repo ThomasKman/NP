@@ -54,27 +54,25 @@ namespace Notenverwaltung
         public void versetzen(int semester,int schulJahr)
         {
 
-            List<Schulfach> fachListeFürÜbertragung = getAktuellesZeugnis().getSchulFächer();
             
             
             
             zeugnisse.Add(new Zeugnis(semester,schulJahr));
-            foreach (Schulfach schulfach in fachListeFürÜbertragung)
-            {
-                getAktuellesZeugnis().addSchulfach(new Schulfach(schulfach.getFachrichtung(),semester));
-            }
+            
                 
         }
 
 
-        public string serialize()
+        public List<string> showInfo()
         {
-            string returnString = "Zeugnisübersicht von " + this.vorName + " " + this.nachName + "\n____________________________________________________\n\n";
+            List<string> returnString = new List<string> { this.vorName+" "+ this.nachName } ;
 
-            foreach (Zeugnis zeugnis in zeugnisse)
+            
+            foreach(string info in getAktuellesZeugnis().showInfo())
             {
-                returnString = returnString + zeugnis.serialize();
+                returnString.Add(info);
             }
+            
 
             return returnString;
 

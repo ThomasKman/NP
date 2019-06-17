@@ -23,7 +23,7 @@ namespace Notenverwaltung
         static void joiads()
         {
             klassenListe = FileReader.readFiles();
-            Console.Write(klassenListe.ElementAt(0).getSchülerListe().First().serialize());
+            Console.Write(klassenListe.ElementAt(0).getSchülerListe().First().showInfo());
             klassenListe.ElementAt(0).versetzen();
             FileWriter.saveFile(klassenListe);
         }
@@ -32,9 +32,9 @@ namespace Notenverwaltung
         {
             SchulKlasse IA218 = new SchulKlasse("IA218", 2019, 2);
 
-            IA218.addSchüler("Thomas", "Kindermann");
-            IA218.addSchüler("Arthur", "Kwant");
-            IA218.addSchüler("Jakob", "Kahl");
+            IA218.AddSchüler("Thomas", "Kindermann");
+            IA218.AddSchüler("Arthur", "Kwant");
+            IA218.AddSchüler("Jakob", "Kahl");
 
             IA218.findeSchüler("Kindermann").neuesZeugnis(IA218.getSemester(),IA218.getSchuljahr());
 
@@ -45,9 +45,9 @@ namespace Notenverwaltung
 
 
 
-            IA218.addSchulfach("Mathematik");
-            IA218.addSchulfach("Deutsch");
-            IA218.addSchulfach("AWE");
+            IA218.AddSchulfach("Mathematik");
+            IA218.AddSchulfach("Deutsch");
+            IA218.AddSchulfach("AWE");
 
             IA218.findeSchüler("Kindermann").getAktuellesZeugnis().addNote("Mathematik", 80, 100, 09, 05);
             IA218.findeSchüler("Kindermann").getAktuellesZeugnis().addNote("Deutsch", 80, 100, 09, 05);
@@ -101,9 +101,9 @@ namespace Notenverwaltung
             IA218.versetzen();
 
             IA218.removeSchulfach("AWE");
-            IA218.addSchulfach("Sport");
+            IA218.AddSchulfach("Sport");
             IA218.removeSchüler("Arthur", "Kwant");
-            IA218.addSchüler("Jeniver", "KnippzZ");
+            IA218.AddSchüler("Jeniver", "KnippzZ");
 
             IA218.findeSchüler("Kindermann").getAktuellesZeugnis().addNote("Mathematik", 50, 100, 06, 05);
             IA218.findeSchüler("Kindermann").getAktuellesZeugnis().addNote("Deutsch", 80, 100, 09, 05);

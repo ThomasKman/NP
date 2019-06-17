@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Notenverwaltung.Grafiken;
-using static System.Console;
-using static System.ConsoleColor;
+ 
+
+
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,29 +28,29 @@ namespace Notenverwaltung
 
         {
 
-            SetBufferSize(120, 60);
-            SetWindowSize(120,60);
+            Console.SetBufferSize(120, 60);
+            Console.SetWindowSize(120,60);
 
-            CursorVisible = false;
-            TreatControlCAsInput = true;
-            ZeichneMenu();
+            Console.CursorVisible = false;
+            Console.TreatControlCAsInput = true;
+            Grafiken.ZeichneMenu();
             HauptMenu hauptMenu = new HauptMenu();
             menu = hauptMenu;
-            AktuelleSchulklasse.addSchüler("test","123");
+            AktuelleSchulklasse.AddSchüler("test","123");
             AktuellerSchüler = AktuelleSchulklasse.findeSchüler("123");
             AktuellerSchüler.neuesZeugnis(1, 1);
             AktuellesZeugnis = AktuellerSchüler.getAktuellesZeugnis();
-            AktuellesZeugnis.addSchulfach(new Schulfach("test",1));
+            AktuellesZeugnis.AddSchulfach(new Schulfach("test",1));
             AktuellesSchulfach = AktuellesZeugnis.getSchulFächer().First();
             AktuellesSchulfach.addNote(new Note(1, 1, 1, 1, 1));
             KlassenManager klassenManager = new KlassenManager();
             Schülermanager schülermanager = new Schülermanager();
             do
             {
-                SetCursorPosition(0, 0);
-                Write(menuIndex + "  " + AktuelleSchulklasse.getName()); 
+                Console.SetCursorPosition(0, 0);
+                Console.Write(menuIndex + "  " + UI.AktuelleSchulklasse.getName()); 
                 menu.UpDateMenu();
-                menuIndex += menu.Navigieren(ReadKey().Key);
+                menuIndex += menu.Navigieren(Console.ReadKey().Key);
                 menu.UpDateMenu();
 
                 switch (menuIndex)
@@ -99,7 +99,7 @@ namespace Notenverwaltung
             do
             {
 
-                key = ReadKey();
+                key = Console.ReadKey();
                 if (Char.IsDigit(key.KeyChar))
                 {
                     Zahl *= 10;
@@ -108,9 +108,9 @@ namespace Notenverwaltung
                 else if (key.Key != ConsoleKey.Enter)
                 {
 
-                    SetCursorPosition(CursorLeft - 1, CursorTop);
-                    Write(" ");
-                    SetCursorPosition(CursorLeft - 1, CursorTop);
+                    Console.SetCursorPosition( Console.CursorLeft - 1,Console.CursorTop);
+                    Console.Write(" ");
+                    Console.SetCursorPosition( Console.CursorLeft - 1,Console.CursorTop);
                 }
 
             } while (key.Key != ConsoleKey.Enter);
@@ -126,7 +126,7 @@ namespace Notenverwaltung
             do
             {
 
-                key = ReadKey();
+                key = Console.ReadKey();
                 if (char.IsLetterOrDigit(key.KeyChar))
                 {
                     Zeichenkette += key.KeyChar;
@@ -134,9 +134,9 @@ namespace Notenverwaltung
                 else if (key.Key != ConsoleKey.Enter)
                 {
 
-                    SetCursorPosition(CursorLeft - 1, CursorTop);
-                    Write(" ");
-                    SetCursorPosition(CursorLeft - 1, CursorTop);
+                    Console.SetCursorPosition( Console.CursorLeft - 1,Console.CursorTop);
+                    Console.Write(" ");
+                    Console.SetCursorPosition( Console.CursorLeft - 1,Console.CursorTop);
                 }
 
             } while (key.Key != ConsoleKey.Enter);

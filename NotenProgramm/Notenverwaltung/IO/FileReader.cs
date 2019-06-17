@@ -59,7 +59,7 @@ namespace Notenverwaltung
                     temp = fr.ReadLine();
                     if (temp.Contains("{"))
                     {
-                        zeugnis.addSchulfach(new Schulfach(temp.Substring(0, temp.Length - 1), zeugnis.getSemester()));
+                        zeugnis.AddSchulfach(new Schulfach(temp.Substring(0, temp.Length - 1), zeugnis.getSemester()));
                         bool x;
                         do
                         {
@@ -103,8 +103,15 @@ namespace Notenverwaltung
                     {
                         string vorName = temp.Substring(temp.IndexOf("_") + 1, temp.Length - 1 - temp.IndexOf("_"));
                         string nachName = temp.Substring(0, temp.IndexOf("_"));
-                        klassenListe.Last().addSchüler(vorName, nachName);
+                        klassenListe.Last().AddSchüler(vorName, nachName);
                         
+                    }
+                    if (temp.Contains("]"))
+                    {
+                        
+                        string fachRichtung = temp.Substring(0, temp.Length-1);
+                        klassenListe.Last().AddSchulfach(fachRichtung);
+
                     }
 
                 }

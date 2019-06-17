@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Notenverwaltung.Grafiken;
-using static Notenverwaltung.UI;
-using static System.Console;
-using static System.ConsoleColor;
+ 
+
+
+
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,7 +38,7 @@ namespace Notenverwaltung
 
             if (gedrückteTaste.Equals(ConsoleKey.Enter))
             {
-                ZeichneMenu();
+               Grafiken.ZeichneMenu();
             }
 
             if (gedrückteTaste.Equals(ConsoleKey.LeftArrow))
@@ -91,7 +91,7 @@ namespace Notenverwaltung
 
             if (navIndex == 3)
             {
-                ConsoleKey key = zeichneDialog("wirklich beenden? [Y/n]", DarkRed, Red);
+                ConsoleKey key =Grafiken.zeichneDialog("wirklich beenden? [Y/n]", ConsoleColor.DarkRed,ConsoleColor.Red);
                 if (key.Equals(ConsoleKey.Enter) || key.Equals(ConsoleKey.Y))
                 {
                     menuModifier = -3;
@@ -114,25 +114,25 @@ namespace Notenverwaltung
 
 
 
-            ZeichneMenuPunkte(1, 14, WindowWidth - 2, navIndex, Menupunkte);
+           Grafiken.ZeichneMenuPunkte(1, 14, Console.WindowWidth - 2, navIndex, Menupunkte);
 
-            if (menuIndex.Equals(3))
+            if (UI.menuIndex.Equals(3))
             {
                 generiereSchülerListe();
-                zeichneElementListe(SchülerListe, -1);
+                Grafiken.zeichneElementListe(SchülerListe, -1);
             }
             else
             {
 
-                zeichneBox(1, 21, (WindowWidth / 4) - 2, 25, ' ', Black, Black, false);
+                Grafiken.zeichneBox(1, 21, (Console.WindowWidth / 4) - 2, 25, ' ', ConsoleColor.Black, ConsoleColor.Black, false);
             }
 
         }
         private void generiereSchülerListe()
         {
             SchülerListe.Clear();
-            if (AktuelleSchulklasse.getSchülerListe().Any()) { 
-            foreach (Schüler schüler in AktuelleSchulklasse.getSchülerListe())
+            if (UI.AktuelleSchulklasse.getSchülerListe().Any()) { 
+            foreach (Schüler schüler in UI.AktuelleSchulklasse.getSchülerListe())
             {
 
                 SchülerListe.Add(schüler.getNachName()+" "+schüler.getVorName());
@@ -153,10 +153,10 @@ namespace Notenverwaltung
                 {
                  //   neueKlasse();
                 }
-                UI.AktuellerSchüler = AktuelleSchulklasse.getSchülerListe().ElementAt(auswahlIndex);
-                zeichneObjektInfo(AktuelleSchulklasse.showInfo(), 2, false);
-                zeichneElementListe(SchülerListe, auswahlIndex);
-                gedrückteTaste = ReadKey(true).Key;
+                UI.AktuellerSchüler = UI.AktuelleSchulklasse.getSchülerListe().ElementAt(auswahlIndex);
+                Grafiken.zeichneObjektInfo(UI.AktuellerSchüler.showInfo(), 2, false);
+                Grafiken.zeichneElementListe(SchülerListe, auswahlIndex);
+                gedrückteTaste = Console.ReadKey(true).Key;
 
 
 
@@ -166,7 +166,7 @@ namespace Notenverwaltung
                     {
                         auswahlIndex--;
 
-                        zeichneObjektInfo(AktuelleSchulklasse.showInfo(), 2, true);
+                        Grafiken.zeichneObjektInfo(UI.AktuellerSchüler.showInfo(), 2, true);
                     }
                     else
                     {
@@ -179,14 +179,14 @@ namespace Notenverwaltung
                     {
                         auswahlIndex++;
 
-                        zeichneObjektInfo(AktuelleSchulklasse.showInfo(), 2, true);
+                        Grafiken.zeichneObjektInfo(UI.AktuellerSchüler.showInfo(), 2, true);
                     }
                     else
                     {
                         auswahlIndex = 0;
                     }
                 }
-                zeichneElementListe(SchülerListe, auswahlIndex);
+                Grafiken.zeichneElementListe(SchülerListe, auswahlIndex);
 
                 if (gedrückteTaste.Equals(ConsoleKey.Escape))
                 {
@@ -200,15 +200,15 @@ namespace Notenverwaltung
                 }
 
 
-                SetCursorPosition(0, 0);
+                Console.SetCursorPosition(0, 0);
 
-                Write(menuIndex + "  " + AktuelleSchulklasse.getName());
+                Console.Write(UI.menuIndex + "  " + UI.AktuelleSchulklasse.getName());
 
 
 
             } while (!exit);
 
-            zeichneObjektInfo(AktuelleSchulklasse.showInfo(), 2, true);
+            Grafiken.zeichneObjektInfo(UI.AktuellerSchüler.showInfo(), 2, true);
 
 
         }
@@ -221,20 +221,19 @@ namespace Notenverwaltung
             List<string> Name;
 
 
-            Name = zeichneEingabeMenü(EingabeInfo);
+            Name = Grafiken.zeichneEingabeMenü(EingabeInfo);
 
-            AktuelleSchulklasse.getSchülerListe().Add(new Schüler(Name.First(), Name.Last()));
-            AktuelleSchulklasse.findeSchüler(Name.Last()).neuesZeugnis(AktuelleSchulklasse.getSemester(), AktuelleSchulklasse.getSchuljahr());
+            UI.AktuelleSchulklasse.AddSchüler(Name.First(), Name.Last());
 
 
-            CursorVisible = false;
-            ConsoleKey Key = Bestätigen("Speichern? [Y/n]");
+            Console.CursorVisible = false;
+            ConsoleKey Key = Grafiken.Bestätigen("Speichern? [Y/n]");
             if (Key.Equals(ConsoleKey.Enter) || Key.Equals(ConsoleKey.Y))
             {
                 FileWriter.saveFile(Program.klassenListe);
             }
 
-            zeichneTextBox(38, 38, '#', Black, Black, NeuerSchülerDialog);
+            Grafiken.zeichneTextBox(38, 38, '#', ConsoleColor.Black, ConsoleColor.Black, Grafiken.NeuerSchülerDialog);
 
 
         }
@@ -253,9 +252,9 @@ namespace Notenverwaltung
                 }
                 UI.AktuelleSchulklasse = Program.klassenListe.ElementAt(auswahlIndex);
                // generiereKlassenInfo();
-               // zeichneObjektInfo(KlassenInfo, 2, false);
-              //  zeichneElementListe(KlassenListe, auswahlIndex);
-                gedrückteTaste = ReadKey(true).Key;
+               // Grafiken.zeichneObjektInfo(KlassenInfo, 2, false);
+              //  Grafiken.zeichneElementListe(KlassenListe, auswahlIndex);
+                gedrückteTaste = Console.ReadKey(true).Key;
 
 
 
@@ -265,7 +264,7 @@ namespace Notenverwaltung
                     {
                         auswahlIndex--;
 
-             //           zeichneObjektInfo(KlassenInfo, 2, true);
+             //           Grafiken.zeichneObjektInfo(KlassenInfo, 2, true);
                     }
                     else
                     {
@@ -278,14 +277,14 @@ namespace Notenverwaltung
                     {
                         auswahlIndex++;
 
-                     //   zeichneObjektInfo(KlassenInfo, 2, true);
+                     //   Grafiken.zeichneObjektInfo(KlassenInfo, 2, true);
                     }
                     else
                     {
                         auswahlIndex = 0;
                     }
                 }
-                zeichneElementListe(SchülerListe, auswahlIndex);
+                Grafiken.zeichneElementListe(SchülerListe, auswahlIndex);
 
                 if (gedrückteTaste.Equals(ConsoleKey.Escape))
                 {
@@ -299,15 +298,15 @@ namespace Notenverwaltung
                 }
 
 
-                SetCursorPosition(0, 0);
+                Console.SetCursorPosition(0, 0);
 
-                Write(menuIndex + "  " + AktuelleSchulklasse.getName());
+                Console.Write(UI.menuIndex + "  " + UI.AktuelleSchulklasse.getName());
 
 
 
             } while (!exit);
 
-       //     zeichneObjektInfo(AktuelleSchulklasse.showInfo(), 2, true);
+       //     Grafiken.zeichneObjektInfo(UI.AktuelleSchulklasse.showInfo(), 2, true);
 
 
         }

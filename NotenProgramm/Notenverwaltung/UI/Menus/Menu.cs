@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Notenverwaltung.Grafiken;
-using static Notenverwaltung.UI;
-using static System.Console;
-using static System.ConsoleColor;
+ 
+
+
+
 using System.Text;
 using System.Threading.Tasks;
 

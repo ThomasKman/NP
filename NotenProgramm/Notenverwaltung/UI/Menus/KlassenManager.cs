@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Notenverwaltung.Grafiken;
-using static Notenverwaltung.UI;
-using static System.Console;
-using static System.ConsoleColor;
+ 
+
+
+
 
 namespace Notenverwaltung
 {
@@ -38,10 +38,9 @@ namespace Notenverwaltung
             {
                 gedrückteTaste = Ausführen();
             }
-
-            if (gedrückteTaste.Equals(ConsoleKey.Enter))
+            if (gedrückteTaste.Equals(ConsoleKey.DownArrow))
             {
-                ZeichneMenu();
+                gedrückteTaste = Ausführen();
             }
 
             if (gedrückteTaste.Equals(ConsoleKey.LeftArrow))
@@ -66,6 +65,7 @@ namespace Notenverwaltung
                     navIndex = 0;
                 }
             }
+            
 
             return menuModifier;
         }
@@ -95,7 +95,7 @@ namespace Notenverwaltung
 
             if (navIndex == 3)
             {
-                ConsoleKey key = zeichneDialog("wirklich beenden? [Y/n]", DarkRed, Red);
+                ConsoleKey key =Grafiken.zeichneDialog("wirklich beenden? [Y/n]", ConsoleColor.DarkRed,ConsoleColor.Red);
                 if (key.Equals(ConsoleKey.Enter) || key.Equals(ConsoleKey.Y))
                 {
                     menuModifier = -2;
@@ -116,16 +116,16 @@ namespace Notenverwaltung
 
 
 
-            ZeichneMenuPunkte(1, 14, WindowWidth - 2, navIndex, Menupunkte);
+           Grafiken.ZeichneMenuPunkte(1, 14, Console.WindowWidth - 2, navIndex, Menupunkte);
 
-            if (menuIndex.Equals(2))
+            if (UI.menuIndex.Equals(2))
             {
-                zeichneElementListe(KlassenListe, -1);
+                Grafiken.zeichneElementListe(KlassenListe, -1);
             }
             else
             {
 
-                zeichneBox(1, 21, (WindowWidth / 4) - 2, 25, ' ', Black, Black, false);
+                Grafiken.zeichneBox(1, 21, (Console.WindowWidth / 4) - 2, 25, ' ', ConsoleColor.Black, ConsoleColor.Black, false);
             }
 
         }
@@ -144,7 +144,7 @@ namespace Notenverwaltung
 
             bool exit = false;
             int auswahlIndex = 0;
-            ZeichneMenuPunkte(33, 20, 86, -1, new List<string>() { "SchülerManager", "Neues Schulfach", "Versetzen", "klasse Löschen" });
+           Grafiken.ZeichneMenuPunkte(33, 20, 86, -1, new List<string>() { "SchülerManager", "Neues Schulfach", "Versetzen", "klasse Löschen" });
 
             ConsoleKey gedrückteTaste;
             do
@@ -155,13 +155,14 @@ namespace Notenverwaltung
                 }
                 UI.AktuelleSchulklasse = Program.klassenListe.ElementAt(auswahlIndex);
 
-                SetCursorPosition(0, 0);
+                Console.SetCursorPosition(0, 0);
 
-                Write(menuIndex + "  " + AktuelleSchulklasse.getName());
+                Console.Write(UI.menuIndex + "  " + UI.AktuelleSchulklasse.getName());
+                UpDateMenu();
                 generiereKlassenInfo();
-                zeichneObjektInfo(KlassenInfo, 3, false);
-                zeichneElementListe(KlassenListe, auswahlIndex);
-                gedrückteTaste = ReadKey(true).Key;
+                Grafiken.zeichneObjektInfo(KlassenInfo, 3, false);
+                Grafiken.zeichneElementListe(KlassenListe, auswahlIndex);
+                gedrückteTaste = Console.ReadKey(true).Key;
                 
 
 
@@ -171,7 +172,7 @@ namespace Notenverwaltung
                         {
                             auswahlIndex--;
 
-                        zeichneObjektInfo(KlassenInfo, 3, true);
+                        Grafiken.zeichneObjektInfo(KlassenInfo, 3, true);
                     }
                         else
                         {
@@ -184,14 +185,14 @@ namespace Notenverwaltung
                         {
                             auswahlIndex++;
 
-                        zeichneObjektInfo(KlassenInfo, 3, true);
+                        Grafiken.zeichneObjektInfo(KlassenInfo, 3, true);
                     }
                         else
                         {
                             auswahlIndex = 0;
                         }
                     }
-                    zeichneElementListe(KlassenListe, auswahlIndex);
+                    Grafiken.zeichneElementListe(KlassenListe, auswahlIndex);
 
                     if (gedrückteTaste.Equals(ConsoleKey.Escape))
                     {
@@ -200,61 +201,58 @@ namespace Notenverwaltung
 
                 if (gedrückteTaste.Equals(ConsoleKey.Enter) || gedrückteTaste.Equals(ConsoleKey.RightArrow)) 
                 {
-                    ZeichneKlassenUnterMenu(0);
-                    
+                    exit=NavigiereKlassenUnterMenu(0);
+                    auswahlIndex = 0;
+                    generiereKlassenListe();
+                    Grafiken.zeichneElementListe(KlassenListe, auswahlIndex);
+                    Grafiken.zeichneObjektInfo(KlassenInfo, 3, true);
                 }
 
 
 
 
-
-                } while (!exit) ;
-
-                zeichneObjektInfo(AktuelleSchulklasse.showInfo(), 3, true);
-
+            } while (!exit) ;
+            
+            
+            
+               
+            
             
         }
     
 
-            private void ZeichneKlassenUnterMenu(int index)
+            private bool NavigiereKlassenUnterMenu(int index)
             {
 
                 int KlassenUntermenuIndex = index;
                 bool unterExit = false;
                 do
                 {
-                    ZeichneMenuPunkte(33, 20,86, KlassenUntermenuIndex, new List<string>() { "SchülerManager","Neues Schulfach","Versetzen","klasse Löschen"});
+                   Grafiken.ZeichneMenuPunkte(33, 20,86, KlassenUntermenuIndex, new List<string>() { "SchülerManager","Neues Schulfach","Versetzen","klasse Löschen"});
 
-                zeichneObjektInfo(AktuelleSchulklasse.showInfo(), 3, false);
+                Grafiken.zeichneObjektInfo(KlassenInfo, 3, false);
 
-                ConsoleKey gedrückteTaste = ReadKey(true).Key;
+                ConsoleKey gedrückteTaste = Console.ReadKey(true).Key;
 
                     if (gedrückteTaste.Equals(ConsoleKey.LeftArrow))
                     {
-                        if (KlassenUntermenuIndex > 0)
-                        {
-                            KlassenUntermenuIndex--;
-                        }
+                    if (KlassenUntermenuIndex > 0)
+                    {
+                    KlassenUntermenuIndex--;
+                    }
+                    else
+                    {
+                        Grafiken.ZeichneMenuPunkte(33, 20, 86, -1, new List<string>() { "SchülerManager", "Neues Schulfach", "Versetzen", "klasse Löschen" });
+                        return false;
+                    }
                         
                     }
-                if (gedrückteTaste.Equals(ConsoleKey.DownArrow))
-                {
-                    if (KlassenUntermenuIndex <4)
-                    {
-                        KlassenUntermenuIndex+=2;
-                        if (KlassenUntermenuIndex > 3)
-                        {
-                            KlassenUntermenuIndex = 3;
-                        }
-                    }
-                   
-                }
+               
                 if (gedrückteTaste.Equals(ConsoleKey.UpArrow))
                 {
-                    if (KlassenUntermenuIndex > 1)
-                    {
-                        KlassenUntermenuIndex -= 2;
-                    }
+
+                    Grafiken.ZeichneMenuPunkte(33, 20, 86, -1, new List<string>() { "SchülerManager", "Neues Schulfach", "Versetzen", "klasse Löschen" });
+                    return true;
 
                 }
                 if (gedrückteTaste.Equals(ConsoleKey.RightArrow))
@@ -266,12 +264,14 @@ namespace Notenverwaltung
                         }
                        
                     }
-                if(gedrückteTaste.Equals(ConsoleKey.Enter))
+                if (gedrückteTaste.Equals(ConsoleKey.Enter) || gedrückteTaste.Equals(ConsoleKey.DownArrow))
                     {
                     if (KlassenUntermenuIndex ==3)
                     {
-                        zeichneObjektInfo(AktuelleSchulklasse.showInfo(), 3, true);
+                        Grafiken.zeichneObjektInfo(KlassenInfo, 3, true);
                         KlasseLöschen();
+                        Grafiken.ZeichneMenuPunkte(33, 20, 86, -1, new List<string>() { "SchülerManager", "Neues Schulfach", "Versetzen", "klasse Löschen" });
+                        return false;
                     }
                    
 
@@ -283,32 +283,43 @@ namespace Notenverwaltung
                     }
                     if (KlassenUntermenuIndex == 2)
                     {
-                        ConsoleKey key = Bestätigen("Klasse versetzen? [Y/n]");
-                    if ( key.Equals(ConsoleKey.Enter));
-                        AktuelleSchulklasse.versetzen();
+                        ConsoleKey key = Grafiken.Bestätigen("Klasse versetzen? [Y/n]");
+                    if ( key.Equals(ConsoleKey.Enter))
+                        {
+
+                            UI.AktuelleSchulklasse.versetzen();
+
+                            Grafiken.ZeichneMenuPunkte(33, 20, 86, -1, new List<string>() { "SchülerManager", "Neues Schulfach", "Versetzen", "klasse Löschen" });
+                            return false;
+                            
+                        }
+
                     }
                     if (KlassenUntermenuIndex ==0)
                     {
                         menuModifier++;
                         navIndex = 0;
-                        KlassenUntermenuIndex = 0;
                         unterExit = true;
-                        
+
+                        Grafiken.ZeichneMenuPunkte(33, 20, 86, -1, new List<string>() { "SchülerManager", "Neues Schulfach", "Versetzen", "klasse Löschen" });
                     }
 
                 }
                 if (gedrückteTaste.Equals(ConsoleKey.Escape))
                 {
 
-                    unterExit = true;
+                    Grafiken.ZeichneMenuPunkte(33, 20, 86, -1, new List<string>() { "SchülerManager", "Neues Schulfach", "Versetzen", "klasse Löschen" });
+                    return true;
                    
 
                 }
 
-
+                
             } while (!unterExit);
 
-                zeichneBox(40, 40, 40, 8, ' ', Black, Black);
+            return unterExit;
+
+
             }
         
 
@@ -316,26 +327,10 @@ namespace Notenverwaltung
         private  void generiereKlassenInfo()
         {
             KlassenInfo.Clear();
-            KlassenInfo = AktuelleSchulklasse.showInfo();
-            if (AktuelleSchulklasse.getSchülerListe().Any() && AktuelleSchulklasse.getSchülerListe().First().getZeugnisse().Any()&& AktuelleSchulklasse.getSchülerListe().First().getZeugnisse().First().getSchulFächer().Any())
+            KlassenInfo = UI.AktuelleSchulklasse.showInfo();
+            if (KlassenInfo.Count() > 11)
             {
-
-                KlassenInfo.Add("Fächer: " + AktuelleSchulklasse.getSchülerListe().First().getAktuellesZeugnis().getSchulFächer().Count().ToString());
-                foreach (Schüler schüler in AktuelleSchulklasse.getSchülerListe())
-                {
-                    foreach(Zeugnis zeugnis in schüler.getZeugnisse())
-                    {
-                        foreach(Schulfach schulfach in zeugnis.getSchulFächer())
-                        {
-                            if (!KlassenInfo.Contains(schulfach.getFachrichtung())){
-
-
-                                KlassenInfo.Add(schulfach.getFachrichtung());
-                                
-                            }
-                        }
-                    }
-                }
+                KlassenInfo.RemoveRange(11, KlassenInfo.Count - 11);
             }
         }
 
@@ -349,23 +344,23 @@ namespace Notenverwaltung
 
             int top = 40;
             int left = 40;
-            // zeichneTextBox(left+1, top, '+',DarkGray ,White , NeueKlasseDialog);
-            temp=zeichneEingabeMenü(new List<string>() {"string","Name :","int","Kalenderjahr: ","int","Semester: " });
+            // Grafiken.zeichneTextBox(left+1, top, '+',DarkConsoleColor.Gray ,White , NeueKlasseDialog);
+            temp=Grafiken.zeichneEingabeMenü(new List<string>() {"string","Name :","int","Kalenderjahr: ","int","Semester: " });
 
 
             Program.klassenListe.Add(new SchulKlasse(temp.ElementAt(0),Int32.Parse(temp.ElementAt(1)),Int32.Parse(temp.ElementAt(2))));
 
-            zeichneTextBox(left+1, top+1, '!', Gray, Black, KlasseSpeichernDialog);
+            Grafiken.zeichneTextBox(left+1, top+1, '!', ConsoleColor.Gray, ConsoleColor.Black, Grafiken.KlasseSpeichernDialog);
 
-            CursorVisible = false;
-            if (ReadKey().Key.Equals(ConsoleKey.Enter) || ReadKey().Key.Equals(ConsoleKey.Y))
+            Console.CursorVisible = false;
+            if (Console.ReadKey().Key.Equals(ConsoleKey.Enter) || Console.ReadKey().Key.Equals(ConsoleKey.Y))
             {
                 FileWriter.saveFile(Program.klassenListe);
                 FileReader.readFiles();
                 
             }
 
-            zeichneBox(left, top, 51, 5, ' ', Black, Black, false);
+            Grafiken.zeichneBox(left, top, 51, 5, ' ', ConsoleColor.Black, ConsoleColor.Black, false);
             generiereKlassenListe();
 
             NavigiereKlassenAuswahl(Program.klassenListe.Count());
@@ -374,16 +369,16 @@ namespace Notenverwaltung
 
         private void KlasseLöschen()
         {
-            ConsoleKey key = zeichneDialog("wirklich Löschen? [Y/n]", DarkRed, Red);
+            ConsoleKey key =Grafiken.zeichneDialog("wirklich Löschen? [Y/n]", ConsoleColor.DarkRed,ConsoleColor.Red);
            
             if (key.Equals(ConsoleKey.Enter) || key.Equals(ConsoleKey.Y))
             {
-                Program.klassenListe.Remove(AktuelleSchulklasse);
-                menuIndex--;
+                Program.klassenListe.Remove(UI.AktuelleSchulklasse);
+                UI.menuIndex--;
                 navIndex = 0;
 
                
-                key = zeichneDialog("Gelöscht. Speichern? [Y/n]", DarkGreen, Green);
+                key =Grafiken.zeichneDialog("Gelöscht. Speichern? [Y/n]", ConsoleColor.DarkGreen,ConsoleColor.Green);
                 if (key.Equals(ConsoleKey.Enter) || key.Equals(ConsoleKey.Y))
                 {
                     FileWriter.saveFile(Program.klassenListe);
@@ -398,12 +393,13 @@ namespace Notenverwaltung
             }
 
         }
+
         private void neuesSchulfach()
         {
-          List<string> fachName = zeichneEingabeMenü(new List<string>() { "string", "Name  : ", "" });
+          List<string> fachName = Grafiken.zeichneEingabeMenü(new List<string>() { "string", "Name  : " });
 
-            AktuelleSchulklasse.addSchulfach( fachName.First());
-            ConsoleKey Key = Bestätigen("Speichern? [Y/n]");
+            UI.AktuelleSchulklasse.AddSchulfach( fachName.First());
+            ConsoleKey Key = Grafiken.Bestätigen("Speichern? [Y/n]");
             if (Key.Equals(ConsoleKey.Enter) || Key.Equals(ConsoleKey.Y))
             {
                 FileWriter.saveFile(Program.klassenListe);
@@ -413,7 +409,7 @@ namespace Notenverwaltung
 
 
             generiereKlassenInfo();
-            zeichneObjektInfo(KlassenInfo,3,false);
+            Grafiken.zeichneObjektInfo(KlassenInfo,3,false);
         }
 
        

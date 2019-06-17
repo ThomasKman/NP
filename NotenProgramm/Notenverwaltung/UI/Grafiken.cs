@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using static System.Console;
 
-using static System.ConsoleColor;
+
+
 using System.Text;
 using System.Threading.Tasks;
 
@@ -69,16 +69,16 @@ ________________________________________________________________________________
 
         public static void ZeichneMenu()  //, auto generieren mit auto abständen zwischen MenüPunkten. Überschrift über box! 
         {
-            SetCursorPosition(0, 0);
+            Console.SetCursorPosition(0, 0);
             int top = 0;
-            Clear();
-            Write(title);
-            top = CursorTop+1;
-            zeichneRahmen(0, top, WindowWidth - 1, 3, '-', Gray, Black);
+           Console.Clear();
+            Console.Write(title);
+            top =Console.CursorTop+1;
+            zeichneRahmen(0, top, Console.WindowWidth - 1, 3, '-', ConsoleColor.Gray, ConsoleColor.Black);
             top +=6;
-            zeichneRahmen(0, top, WindowWidth / 4, WindowHeight-(top+3), '#', Gray, Black);
-            zeichneRahmen(WindowWidth / 4 + 2, top, ((WindowWidth / 4) * 3) - 3 ,WindowHeight - (top + 3), '+', Gray, Black);
-            SetCursorPosition(0, 0);
+            zeichneRahmen(0, top, Console.WindowWidth / 4, Console.WindowHeight-(top+3), '#', ConsoleColor.Gray, ConsoleColor.Black);
+            zeichneRahmen(Console.WindowWidth / 4 + 2, top, ((Console.WindowWidth / 4) * 3) - 3 , Console.WindowHeight - (top + 3), '+', ConsoleColor.Gray, ConsoleColor.Black);
+            Console.SetCursorPosition(0, 0);
 
         }
 
@@ -86,7 +86,7 @@ ________________________________________________________________________________
         {
             int ElementBreite;
             int i;
-            SetCursorPosition(left, top);
+            Console.SetCursorPosition(left, top);
              
             foreach (string menuPunkt in MenuPunkte)
             {
@@ -94,25 +94,35 @@ ________________________________________________________________________________
                 ElementBreite = breite / MenuPunkte.Count();
                 if (i == activeElement)
                 {
-                    BackgroundColor = Gray;
-                    ForegroundColor = Black;
+                    if (i == MenuPunkte.Count() - 1)
+                    {
+                        Console.BackgroundColor = ConsoleColor.DarkRed;
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = ConsoleColor.Gray;
+                        Console.ForegroundColor = ConsoleColor.Black;
+
+
+                    }
                 }
 
                 if(i == 0) {
 
-                zeichneTextBox(CursorLeft, CursorTop,ElementBreite +=(breite%ElementBreite),1, ' ', BackgroundColor,ForegroundColor, menuPunkt);
+                zeichneTextBox( Console.CursorLeft,Console.CursorTop,ElementBreite +=(breite%ElementBreite),1, ' ', Console.BackgroundColor, Console.ForegroundColor, menuPunkt);
                 }
                 else
                 {
 
-                    zeichneTextBox(CursorLeft, CursorTop, ElementBreite, 1, ' ', BackgroundColor,ForegroundColor, menuPunkt);
+                    zeichneTextBox( Console.CursorLeft,Console.CursorTop, ElementBreite, 1, ' ', Console.BackgroundColor, Console.ForegroundColor, menuPunkt);
                 }
                  
                 
-                BackgroundColor = Black;
-                ForegroundColor = Gray;
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
-            SetCursorPosition(0, 0);
+            Console.SetCursorPosition(0, 0);
         }
 
         public static void zeichneElementListe(List<string> Elemente,int NavIndex)
@@ -122,14 +132,14 @@ ________________________________________________________________________________
             { 
                 if(i == NavIndex)
                 {
-                    BackgroundColor = Gray;
-                    ForegroundColor = Black;
+                    Console.BackgroundColor = ConsoleColor.Gray;
+                    Console.ForegroundColor = ConsoleColor.Black;
 
                 }
-                SetCursorPosition(2, top);
+                Console.SetCursorPosition(2, top);
                 top++;
-                Write(Elemente.ElementAt(i));
-                ResetColor();
+                Console.Write(Elemente.ElementAt(i));
+                Console.ResetColor();
             }
         }
         
@@ -139,18 +149,18 @@ ________________________________________________________________________________
             ConsoleColor Bg;
             ConsoleColor fg;
             int top = 23;
-            int left = (WindowWidth / 4) + 3;
-            int breite = (((WindowWidth / 4) * 3)/2)-3;
+            int left = (Console.WindowWidth / 4) + 3;
+            int breite = (((Console.WindowWidth / 4) * 3)/2)-3;
             if (hide)
             {
-                Bg = Black;
-                 fg = Black;
+                Bg = ConsoleColor.Black;
+                 fg = ConsoleColor.Black;
 
             }
             else
             {
-                 Bg = Gray;
-                 fg = Black;
+                 Bg = ConsoleColor.Gray;
+                 fg = ConsoleColor.Black;
             }
             zeichneTextBox(left, top, breite, 3, '*', fg, Bg, ObjectInfo.First());
             for (int i = 1; i < ObjectInfo.Count; i++)
@@ -177,25 +187,26 @@ ________________________________________________________________________________
         {
             List<string> temp = new List<string>();
             int top = 23;
-            int left = (WindowWidth / 4) + 3;
-            int breite = (((WindowWidth / 4) * 3) / 2) - 3;
-
+            int left = (Console.WindowWidth / 4) + 3;
+            int breite = (((Console.WindowWidth / 4) * 3) / 2) - 3;
+            
 
             for (int i = 1; i < EingabeFelder.Count(); i++)
             {
 
-                if (EingabeFelder.Count>2)
+                if (EingabeFelder.Count==2)
                 {
-                    zeichneTextBox(left, top + (5 * (i/2)), breite, 3, '#', BackgroundColor, ForegroundColor, EingabeFelder.ElementAt(i));
+                    zeichneTextBox(left + breite + 1, top, breite, 3, '*', Console.BackgroundColor, ConsoleColor.Cyan, EingabeFelder.ElementAt(i));
 
-                    SetCursorPosition(left +1 + (breite + EingabeFelder.ElementAt(i).Length) / 2, top + (5 * (i / 2))+2);
+                    Console.SetCursorPosition(left + breite + 2 + (breite + EingabeFelder.ElementAt(i).Length) / 2, top + 2);
                 }
                 else
                 {
 
-                    zeichneTextBox(left + breite + 1, top, breite, 3, '*', BackgroundColor, ForegroundColor, EingabeFelder.ElementAt(i));
+                    zeichneTextBox(left, top + (5 * (i/2)), breite, 3, '#', Console.BackgroundColor, ConsoleColor.Green, EingabeFelder.ElementAt(i));
 
-                    SetCursorPosition(left + breite + 2 + (breite + EingabeFelder.ElementAt(i).Length) / 2, top + 2);
+                    Console.SetCursorPosition(left +1 + (breite + EingabeFelder.ElementAt(i).Length) / 2, top + (5 * (i / 2))+2);
+                   
                 }
 
                 
@@ -220,98 +231,98 @@ ________________________________________________________________________________
 
         public static ConsoleKey Bestätigen(string nachricht)
         {
-            return zeichneDialog(nachricht, DarkGreen, Green);
+            return zeichneDialog(nachricht, ConsoleColor.DarkGreen,ConsoleColor.Green);
         }
 
         public static ConsoleKey zeichneDialog(  string nachricht, ConsoleColor background, ConsoleColor schriftFarbe)
         {
             int top = 30;
-            int left = WindowWidth / 2;
+            int left = Console.WindowWidth / 2;
             int breite = 30;
             ConsoleKey key;
-            BackgroundColor = background;
-            ForegroundColor = schriftFarbe;
+            Console.BackgroundColor = background;
+            Console.ForegroundColor = schriftFarbe;
 
             zeichneTextBox(left, top, breite, 5, '#', background,schriftFarbe, nachricht);
-            ResetColor();
+            Console.ResetColor();
 
 
-            key = ReadKey().Key;
-            zeichneBox(left, top, breite, 5,' ',Black,Black,false);
+            key = Console.ReadKey().Key;
+            zeichneBox(left, top, breite, 5,' ',ConsoleColor.Black,ConsoleColor.Black,false);
             return key;
         }
 
         public static void zeichneRahmen(int left, int top, int breite, int anzahlZeilen, char symb, ConsoleColor hintergrundFarbe, ConsoleColor schriftFarbe)
         {
-            BackgroundColor = hintergrundFarbe;
-            ForegroundColor = schriftFarbe;
+            Console.BackgroundColor = hintergrundFarbe;
+            Console.ForegroundColor = schriftFarbe;
 
-            SetCursorPosition(left, top);
+            Console.SetCursorPosition(left, top);
             for(int i =left; i <left+breite;i++)
             {
-                Write(symb);
+                Console.Write(symb);
             }
             for(int i = top;  i<=(top+anzahlZeilen);i++)
             {
-                SetCursorPosition(left, i);
-                Write(symb);
+                Console.SetCursorPosition(left, i);
+                Console.Write(symb);
 
-                SetCursorPosition(left+breite, i);
-                Write(symb);
+                Console.SetCursorPosition(left+breite, i);
+                Console.Write(symb);
             }
-            SetCursorPosition(left, top + anzahlZeilen+1);
+            Console.SetCursorPosition(left, top + anzahlZeilen+1);
             for (int i = left; i <=left + breite; i++)
             {
-                Write(symb);
+                Console.Write(symb);
             }
         }
 
 
         public static void zeichneBox(int left, int top, int breite, int anzahlZeilen, char symb, ConsoleColor hintergrundFarbe, ConsoleColor schriftFarbe, bool borderInverted)
         {
-            ConsoleColor borderColor = BackgroundColor;
-            SetCursorPosition(left, top);
-            ForegroundColor = schriftFarbe;
+            ConsoleColor borderColor = Console.BackgroundColor;
+            Console.SetCursorPosition(left, top);
+            Console.ForegroundColor = schriftFarbe;
             if (borderInverted)
             {
                 borderColor = schriftFarbe;
-                BackgroundColor = borderColor;
-                ForegroundColor = hintergrundFarbe;
+                Console.BackgroundColor = borderColor;
+                Console.ForegroundColor = hintergrundFarbe;
             }
 
-            Write(symb);
+            Console.Write(symb);
             for (int i = 1; i < breite; i++)
             {
-                Write(symb);
+                Console.Write(symb);
             }
-            WriteLine(symb);
+            Console.WriteLine(symb);
             for (int i = 1; i <= anzahlZeilen; i++)
             {
-                SetCursorPosition(left, top + i);
-                Write(symb);
+                Console.SetCursorPosition(left, top + i);
+                Console.Write(symb);
                 for (int j = 1; j < breite; j++)
                 {
-                    BackgroundColor = hintergrundFarbe;
-                    Write(" ");
+                    Console.BackgroundColor = hintergrundFarbe;
+                    Console.Write(" ");
                 }
 
-                BackgroundColor = borderColor;
-                WriteLine(symb);
+                Console.BackgroundColor = borderColor;
+                Console.WriteLine(symb);
             }
 
-            SetCursorPosition(left, top + anzahlZeilen + 1);
-            Write(symb);
+            Console.SetCursorPosition(left, top + anzahlZeilen + 1);
+            Console.Write(symb);
             for (int i = 1; i < breite; i++)
             {
-                Write(symb);
+                Console.Write(symb);
             }
-            Write(symb);
-            ResetColor();
+            Console.Write(symb);
+            Console.ResetColor();
         }
 
         public static void zeichneBox(int left, int top, int breite, int anzahlZeilen, char symb, ConsoleColor hintergrundFarbe, ConsoleColor schriftFarbe)
         {
-            zeichneBox(left, top, breite, anzahlZeilen, symb, hintergrundFarbe, schriftFarbe, false);
+            Grafiken.zeichneBox(left, top, breite, anzahlZeilen, symb, hintergrundFarbe, schriftFarbe, false);
         }
 
 
@@ -325,18 +336,18 @@ ________________________________________________________________________________
                 {
                     
                 }
-                zeichneBox(left, top, breite, Inhalt.Count(), symb, hintergrundFarbe, schriftFarbe);
-                BackgroundColor = hintergrundFarbe;
-                ForegroundColor = schriftFarbe;
-                SetCursorPosition(left + 1, AktuelleZeile++);
+                Grafiken.zeichneBox(left, top, breite, Inhalt.Count(), symb, hintergrundFarbe, schriftFarbe);
+                Console.BackgroundColor = hintergrundFarbe;
+               Console.ForegroundColor = schriftFarbe;
+                Console.SetCursorPosition(left + 1, AktuelleZeile++);
                 foreach (String textzeile in Inhalt)
                 {
-                    SetCursorPosition(left + 1, AktuelleZeile++);
-                    Write(textzeile);
+                    Console.SetCursorPosition(left + 1, AktuelleZeile++);
+                    Console.Write(textzeile);
                 }
 
 
-                ResetColor();
+                Console.ResetColor();
 
             }
 
@@ -349,23 +360,23 @@ ________________________________________________________________________________
 
 
             zeichneBox(left, top, breite-1, AnzahlZeilen, symb, hintergrundFarbe, schriftFarbe);
-            BackgroundColor = hintergrundFarbe;
-            ForegroundColor = schriftFarbe;
-            SetCursorPosition(left + (((breite-Inhalt.Length) / 2)), AktuelleZeile);
-            Write(Inhalt);
-            SetCursorPosition(left+breite, top);
-            CursorVisible = false;
+            Console.BackgroundColor = hintergrundFarbe;
+           Console.ForegroundColor = schriftFarbe;
+            Console.SetCursorPosition(left + (((breite-Inhalt.Length) / 2)), AktuelleZeile);
+            Console.Write(Inhalt);
+            Console.SetCursorPosition(left+breite, top);
+            Console.CursorVisible = false;
 
 
 
-            ResetColor();
+            Console.ResetColor();
 
 
         }
 
         public static void zeichneTextBox(int left, int top, int AnzahlZeilen, char symb, string Inhalt)
         {
-            zeichneTextBox(left, top,1, AnzahlZeilen, symb, BackgroundColor, ForegroundColor, Inhalt);
+            zeichneTextBox(left, top,1, AnzahlZeilen, symb, Console.BackgroundColor,Console.ForegroundColor, Inhalt);
         }
 
 
@@ -384,24 +395,24 @@ ________________________________________________________________________________
                     }
                 }
                 zeichneBox(left, top, AanzahlZeichen + 2, Inhalt.Count(), symb, hintergrundFarbe, schriftFarbe);
-                BackgroundColor = hintergrundFarbe;
-                ForegroundColor = schriftFarbe;
-                SetCursorPosition(left + 1, AktuelleZeile++);
-                foreach (String textzeile in Inhalt)
+                Console.BackgroundColor = hintergrundFarbe;
+               Console.ForegroundColor = schriftFarbe;
+                Console.SetCursorPosition(left + 1, AktuelleZeile++);
+                foreach (string textzeile in Inhalt)
                 {
-                    SetCursorPosition(left + 1, AktuelleZeile++);
-                    Write(textzeile);
+                    Console.SetCursorPosition(left + 1, AktuelleZeile++);
+                    Console.Write(textzeile);
                 }
 
 
-                ResetColor();
+                Console.ResetColor();
 
             }
         }
 
         public static void zeichneTextBox(int left, int top, char symb, List<string> Inhalt)
         {
-            zeichneTextBox(left, top, symb, BackgroundColor, ForegroundColor, Inhalt);
+            zeichneTextBox(left, top, symb, Console.BackgroundColor,Console.ForegroundColor, Inhalt);
         }
 
 

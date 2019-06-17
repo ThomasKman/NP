@@ -44,7 +44,7 @@
     <Compile Include="IO\FileReader.cs" />
     <Compile Include="IO\FileWriter.cs" />
     <Compile Include="UI\Grafiken.cs" />
-    <Compile Include="UI\Menus\SchülerManager.cs" />
+    <Compile Include="UI\Menus\SchuelerManager.cs" />
     <Compile Include="UI\Menus\KlassenManager.cs" />
     <Compile Include="UI\Menus\HauptMenu.cs" />
     <Compile Include="UI\Menus\Menu.cs" />
@@ -53,7 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Backend\Schulfach.cs" />
     <Compile Include="Backend\SchulKlasse.cs" />
-    <Compile Include="Backend\Schüler.cs" />
+    <Compile Include="Backend\Schueler.cs" />
     <Compile Include="UI\UI.cs" />
     <Compile Include="Backend\Werkzeuge.cs" />
     <Compile Include="Backend\Zeugnis.cs" />

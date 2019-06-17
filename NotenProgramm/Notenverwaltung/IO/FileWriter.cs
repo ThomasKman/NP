@@ -9,7 +9,8 @@ namespace Notenverwaltung
 {
     class FileWriter
     {
-       static string path;
+        
+        static string path;
         static List<string> pathList = new List<string>();
 
 
@@ -21,6 +22,10 @@ namespace Notenverwaltung
                 pathList.Add(klasse.getName() + "{");
                 pathList.Add(klasse.getSchuljahr().ToString());
                 pathList.Add(klasse.getSemester().ToString());
+                foreach(Schulfach fach in klasse.getSchulfaecher())
+                {
+                    pathList.Add(fach.getFachrichtung() + "]");
+                }
 
                 foreach (Schüler schüler in klasse.getSchülerListe())
                 {

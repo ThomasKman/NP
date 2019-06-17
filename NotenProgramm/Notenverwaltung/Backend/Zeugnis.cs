@@ -41,7 +41,7 @@ namespace Notenverwaltung
             return temp / schulfächer.Count;
         }
 
-        public void addSchulfach(Schulfach schulfach)
+        public void AddSchulfach(Schulfach schulfach)
         {
             this.schulfächer.Add(schulfach);
         }
@@ -74,12 +74,12 @@ namespace Notenverwaltung
 
         }
 
-        public string serialize()
+        public List<string> showInfo()
         {
-            string returnString = "Zeugnis Halbjahr " + this.Semester + " " + this.SchulJahr + "\n____________________________________________________\n\n";
+            List<string> returnString = new List<string>() { "Semester :" + this.Semester  ,"Kalender Jahr: " + this.SchulJahr  };
             foreach (Schulfach schulfach in schulfächer)
             {
-                returnString += schulfach.serialize()+"____________________________________________________\n\n";
+                returnString.Add(schulfach.getFachrichtung());
             }
 
             return returnString;

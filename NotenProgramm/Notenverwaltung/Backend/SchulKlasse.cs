@@ -8,7 +8,7 @@ namespace Notenverwaltung
 {
     class SchulKlasse
     {
-
+        List<Schulfach> schulfaecher;
         private string name;
         private List<Schüler> schülerListe;
         int schulJahr;
@@ -27,6 +27,7 @@ namespace Notenverwaltung
                 this.semester = 1;
             }
             this.schülerListe = new List<Schüler>();
+            this.schulfaecher = new List<Schulfach>();
         }
 
 
@@ -38,16 +39,17 @@ namespace Notenverwaltung
 
 
 
-        public void addSchüler(string vorName, string nachName)
+        public void AddSchüler(string vorName, string nachName)
         {
             Schüler neuerSchüler = new Schüler(vorName, nachName);
-            if (schülerListe.Any() && schülerListe.First().getZeugnisse().Any())
+            neuerSchüler.neuesZeugnis(semester, schulJahr);
+            if (schulfaecher.Any())
             {
-                List<Schulfach> übertrageneFächer = schülerListe.First().getAktuellesZeugnis().getSchulFächer();
+               
 
-                foreach (Schulfach schulfach in übertrageneFächer)
+                foreach (Schulfach schulfach in schulfaecher)
                 {
-                    neuerSchüler.getAktuellesZeugnis().addSchulfach(schulfach);
+                    neuerSchüler.getAktuellesZeugnis().AddSchulfach(schulfach);
                 }
 
             }
@@ -88,13 +90,7 @@ namespace Notenverwaltung
             return findeSchüler("", nachName);
         }
 
-        public void addSchulfach(string fachRichtung)
-        {
-            foreach (Schüler schüler in schülerListe)
-            {
-                schüler.getAktuellesZeugnis().addSchulfach(new Schulfach(fachRichtung, this.semester));
-            }
-        }
+
 
         public void removeSchulfach(string fachRichtung)
         {
@@ -104,6 +100,22 @@ namespace Notenverwaltung
             }
         }
 
+        public List<Schulfach> getSchulfaecher()
+        {
+            return this.schulfaecher;
+        }
+
+        public void AddSchulfach(string fachRichtung)
+        {
+            schulfaecher.Add(new Schulfach(fachRichtung, semester));
+            if (schülerListe.Any())
+            {
+                foreach (Schüler schüler in schülerListe)
+                {
+                    schüler.getAktuellesZeugnis().AddSchulfach(new Schulfach(fachRichtung, this.semester));
+                }
+            }
+        }
 
         public void versetzen()
         {
@@ -113,6 +125,7 @@ namespace Notenverwaltung
             {
                 schüler.versetzen(semester, schulJahr);
             }
+            schulfaecher.Clear();
         }
 
         public string getName()
@@ -145,8 +158,12 @@ namespace Notenverwaltung
         public List<string> showInfo()
         {
             
-            List<string> temp = new List<string>() {"Klasse: "+ name, "Aktuelles Semester: " + semester, "Kalender Jahr     : " + schulJahr, "Schüler: "+schülerListe.Count().ToString(), };
-            
+            List<string> temp = new List<string>() {"Klasse: "+ name, "Aktuelles Semester: " + semester, "Kalender Jahr     : " + schulJahr, "Schüler: "+schülerListe.Count().ToString() ,"Schulfächer: "+schulfaecher.Count().ToString()};
+
+            foreach (Schulfach schulfach in schulfaecher)
+            {
+                temp.Add(schulfach.getFachrichtung());
+            }
 
             return temp;
     

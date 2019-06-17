@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Notenverwaltung.Grafiken;
-using static Notenverwaltung.UI;
-using static System.Console;
-using static System.ConsoleColor;
+ 
+
+
 using System.Text;
 using System.Threading.Tasks;
 
@@ -75,7 +74,7 @@ namespace Notenverwaltung
             if (navIndex == 1)
             {
                 Program.klassenListe = FileReader.readFiles();
-                return Bestätigen("Laden Erfolgreich");
+                return Grafiken.Bestätigen("Laden Erfolgreich");
                 
             }
 
@@ -87,7 +86,7 @@ namespace Notenverwaltung
 
             if (navIndex == 3)
             {
-                ConsoleKey key = zeichneDialog("wirklich beenden? [Y/n]", DarkRed, Red);
+                ConsoleKey key =Grafiken.zeichneDialog("wirklich beenden? [Y/n]", ConsoleColor.DarkRed,ConsoleColor.Red);
                 if (key.Equals(ConsoleKey.Enter) || key.Equals(ConsoleKey.Y))
                 {
                     menuModifier--;
@@ -109,7 +108,7 @@ namespace Notenverwaltung
         {
 
 
-            ZeichneMenuPunkte(1, 14, WindowWidth-2, navIndex,  Menupunkte);
+           Grafiken.ZeichneMenuPunkte(1, 14, Console.WindowWidth-2, navIndex,  Menupunkte);
         }
 
 
